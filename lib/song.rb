@@ -20,14 +20,14 @@ class Song
   end
 
   def save
-    sql = <<-SQL
+    sql =<<-SQL
       INSERT INTO songs (name, album)
       VALUES (?, ?)
     SQL
 
     DB[:conn].execute(sql, self.name, self.album)
 
-    self.id =DB[:conn].execute("SELECT last_insert_rowid() FROM songs")[0][0]
+    self.id = DB[:conn].execute("SElECT last_insert_rowid() FROM songs")[0][0]
 
     self
   end
@@ -36,5 +36,5 @@ class Song
     song = Song.new(name: name, album: album)
     song.save
   end
-
+  
 end
